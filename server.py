@@ -12,8 +12,8 @@ def emotion_detection():
     text_to_analyze = request.values.get('textToAnalyze')
     result = emotion_detector(text_to_analyze)
 
-    if result is None:
-        return "Invalid input. Please try again."
+    if result['dominant_emotion'] is None:
+        return "Invalid text! Please try again!"
 
     response = (
         f"For the given statement, the system response is "
@@ -27,4 +27,4 @@ def emotion_detection():
     return response
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug = True, port=5001)
