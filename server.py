@@ -1,3 +1,9 @@
+"""
+Flask web server for emotion detection application.
+Serves a web interface for analyzing user input text
+and detecting emotions using a pre-built model.
+"""
+
 from flask import Flask, render_template, request
 from EmotionDetection import emotion_detector
 
@@ -5,10 +11,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    """Render the homepage with the input form."""
     return render_template('index.html')
 
 @app.route('/emotionDetector')
 def emotion_detection():
+    """Process input text and return detected emotions."""
     text_to_analyze = request.values.get('textToAnalyze')
     result = emotion_detector(text_to_analyze)
 
@@ -27,4 +35,4 @@ def emotion_detection():
     return response
 
 if __name__ == '__main__':
-    app.run(debug = True, port=5001)
+    app.run(debug=True, port=5001)
